@@ -2,6 +2,7 @@ const simplified = require('./simplified')
 
 const noMatchChar = new Set(['i', 'u', 'v'])
 const topChar = new Set(['b', 'c', 'd', 'f', 'j', 'k', 'l', 'm', 'p', 'q', 'r', 's', 't', 'w', 'x', 'y', 'z'])
+const topChar2 = new Set(['h', 'n', 'g'])
 const specialChar = {
   // ua, ia
   'a': new Set(['u', 'i']),
@@ -60,7 +61,7 @@ const divideChar = (chars) => {
   const arr = chars.split('')
   const len = arr.length
   let fChar = arr[0]
-  let fTop = topChar.has(fChar)
+  let fTop = topChar.has(fChar) || topChar2.has(fChar)
   for (let i = 1; i < len; i++) {
     const sChar = arr[i]
     let isTopChar = topChar.has(sChar)
@@ -154,6 +155,9 @@ const matchedText = (text, search) => {
   }
 }
 
-const text = '2长还石'
+const text = '还是'
 
-console.log(matchedText(text, '2changhai'))
+console.log(matchedText(text, 'huan'))
+console.log(matchedText(text, 'hai'))
+console.log(matchedText(text, 'hs'))
+console.log(matchedText(text, 's'))
