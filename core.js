@@ -120,8 +120,10 @@ const matchedText = (text, search) => {
     }
     const fSChar = search[searchId]
     const matcheds = toDoChar.filter(char => char.startsWith(fSChar)) || []
-    if (match (text, search, divide, textId + 1, textLen, searchId + 1, searchLen)) {
-      return true
+    if (matcheds.length > 0) {
+      if (match (text, search, divide, textId + 1, textLen, searchId + 1, searchLen)) {
+        return true
+      }
     }
     for (let mi = 0; mi < matcheds.length; mi++) {
       const matched = matcheds[mi]
