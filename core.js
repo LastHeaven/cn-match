@@ -119,11 +119,12 @@ const matchedText = (text, search) => {
       toDoChar = [char]
     }
     const fSChar = search[searchId]
-    const matched = toDoChar.find(char => char.startsWith(fSChar))
-    if (matched) {
-      if (match (text, search, divide, textId + 1, textLen, searchId + 1, searchLen)) {
-        return true
-      }
+    const matcheds = toDoChar.filter(char => char.startsWith(fSChar)) || []
+    if (match (text, search, divide, textId + 1, textLen, searchId + 1, searchLen)) {
+      return true
+    }
+    for (let mi = 0; mi < matcheds.length; mi++) {
+      const matched = matcheds[mi]
       let j = 1
       for (let i = searchId + 1; i < searchLen; i++) {
         if (divide[i] && matched[j] === search[i]) {
@@ -136,6 +137,7 @@ const matchedText = (text, search) => {
         }
       }
     }
+
     if (searchId === 0) {
       start = textId + 1
       return match (text, search, divide, textId + 1, textLen, 0, searchLen)
@@ -150,6 +152,6 @@ const matchedText = (text, search) => {
   }
 }
 
-const text = '看安南宫'
+const text = '2长还石'
 
-console.log(text.substring(...matchedText(text, 'kang')))
+console.log(matchedText(text, '2changhai'))
